@@ -1,0 +1,79 @@
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+  width: 100%;
+}
+.stepper-form {
+  min-width: 150px;
+  /* max-width: 800px; */
+  width: 100%;
+}
+
+/* Active header background and styling */
+::ng-deep .mat-step-header[aria-selected="true"] {
+  background-color: maroon;
+}
+/* Active header label */
+::ng-deep .mat-step-header[aria-selected="true"] .mat-step-label-active {
+  color: white;
+  font-weight: bold;
+}
+/* Active header icon */
+::ng-deep .mat-step-header[aria-selected="true"] .mat-step-icon-selected {
+  background-color: yellow;
+  color: blueviolet;
+}
+/* Header background and styling */
+::ng-deep .mat-step-header {
+  background-color: green;
+  color: white;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+/* Header font color */
+::ng-deep .mat-step-text-label {
+  color: white;
+}
+/* Header hover styling */
+::ng-deep .mat-step-header:hover {
+  background-color: darkseagreen;
+}
+/* Stepper Navigate button styling */
+.mat-button-base {
+  background-color: maroon;
+  color: white;
+  margin: 3px 3px 3px 3px;
+}
+.saveButton {
+  background-color: darkblue;
+  color: white;
+}
+.discardChangesButton {
+  background-color: darkred;
+  color: white;
+}
+.createButton {
+  background-color: darkgreen;
+  color: white;
+}
+
+.specialtycheckboxes {
+  display: flex;
+  flex-direction: column;
+}
+
+.specialtycontainer {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.specialtyLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

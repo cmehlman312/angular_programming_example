@@ -1,0 +1,50 @@
+.buttoncontainer {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  width: 100%;
+}
+
+/* .leftbuttoncontainer {
+  justify-content: left;
+}*/
+
+.centerbuttoncontainer {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+footer {
+  position: fixed;
+  bottom: 1em;
+}
+
+.editButton {
+  background-color: darkorange;
+}
+.backButton {
+  background-color: blue;
+}
+
+.approveButton {
+  background-color: green;
+}
+.rejectButton {
+  background-color: firebrick;
+}
+.reviseButton {
+  background-color: darkorange;
+}
+.submittomeetingButton {
+  background-color: darkgreen;
+}
+
+.backButton,
+.approveButton,
+.reviseButton,
+.rejectButton,
+.submittomeetingButton {
+  color: white;
+}

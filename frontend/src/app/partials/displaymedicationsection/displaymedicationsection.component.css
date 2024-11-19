@@ -1,0 +1,15 @@
+.detailLabel {
+  font-weight: bold;
+  color: firebrick;
+}
+
+.detailLabel::after {
+  content: "\00a0\00a0\00a0";
+  white-space: pre;
+}
+
+.displayRichText,
+.detailLabel,
+.detailData {
+  font-size: 18px;
+}

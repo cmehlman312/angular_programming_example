@@ -1,0 +1,102 @@
+<div [ngClass]="testStyle">
+  <form [formGroup]="section">
+    <div class="mainSection">
+      <div class="dataSection">
+        <div>
+          <mat-form-field>
+            <mat-label>{{ sectionDetailName }}</mat-label>
+            <textarea
+              matInput
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"
+              formControlName="{{ sectionControlName }}"
+            ></textarea>
+          </mat-form-field>
+        </div>
+        <div *ngIf="showDetails">
+          <div>
+            <mat-form-field>
+              <mat-label>Dose</mat-label>
+              <input matInput formControlName="dose" />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Admin Duration</mat-label>
+              <input matInput formControlName="adminduration" />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Route</mat-label>
+              <input matInput formControlName="route" />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Frequency</mat-label>
+              <input matInput formControlName="frequency" />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Rate</mat-label>
+              <input matInput formControlName="rate" />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Admin Instructions</mat-label>
+              <input matInput formControlName="admininstructions" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Interval</mat-label>
+            <mat-select formControlName="interval">
+              <mat-option value="Daily">Daily</mat-option>
+              <mat-option value="Every visit">Every visit</mat-option>
+              <mat-option value="Monthly">Monthly</mat-option>
+              <mat-option value="Once">Once</mat-option>
+              <mat-option value="PRN">PRN</mat-option>
+              <mat-option value="Quarterly">Quarterly</mat-option>
+              <mat-option value="Selected treatments">
+                Selected treatments
+              </mat-option>
+              <mat-option value="Weekly">Weekly</mat-option>
+              <mat-option value="Custom">Custom</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div
+          *ngIf="this.section.get('interval')?.value.toLowerCase() === 'custom'"
+        >
+          <div>
+            <mat-form-field>
+              <mat-label>Custom Interval</mat-label>
+              <input matInput formControlName="custominterval" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="this.showComment">
+          <mat-form-field>
+            <mat-label>Comments</mat-label>
+            <input matInput formControlName="comments" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="deleteSection">
+        <button
+          type="button"
+          class="remove"
+          (click)="removeTestChild(this.sectionIndex)"
+        >
+          <mat-icon> delete </mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

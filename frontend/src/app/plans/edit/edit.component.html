@@ -1,0 +1,393 @@
+<form [formGroup]="planForm">
+  <mat-horizontal-stepper>
+    <mat-step>
+      <ng-template matStepLabel>General</ng-template>
+      <mat-form-field>
+        <mat-label>Requestor</mat-label>
+        <input matInput formControlName="requestor" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Request Number</mat-label>
+        <input matInput formControlName="number" readonly="true" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Medication Name</mat-label>
+        <input matInput formControlName="medicationname" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <input matInput formControlName="status" readonly="true" />
+      </mat-form-field>
+      <div formGroupName="specialty" class="specialtycontainer">
+        <mat-label class="specialtyLabel">Specialty</mat-label>
+        <div class="specialtycheckboxes">
+          <mat-checkbox formControlName="rheumatology">
+            Rheumatology
+          </mat-checkbox>
+          <mat-checkbox formControlName="gastroenterology">
+            Gastroenterology
+          </mat-checkbox>
+          <mat-checkbox formControlName="neurology">Neurology</mat-checkbox>
+          <mat-checkbox formControlName="endocrinology">
+            Endocrinology
+          </mat-checkbox>
+          <mat-checkbox formControlName="supportive">Supportive</mat-checkbox>
+        </div>
+      </div>
+      <div>
+        <button type="button" mat-button matStepperPrevious>Previous</button>
+        <button type="button" mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Clinical</ng-template>
+      <mat-vertical-stepper #stepper>
+        <mat-step class="dataSection">
+          <ng-template matStepLabel>Required Labs</ng-template>
+          <ng-container formArrayName="requiredlabs" class="dataSection">
+            <ng-container
+              *ngFor="
+                let requiredlabGroup of requiredlabs().controls;
+                let labIndex = index
+              "
+            >
+              <medicationsection
+                [formGroupName]="labIndex"
+                [sections]="requiredlabs()"
+                [section]="sectionGroupElement(requiredlabGroup)"
+                [sectionIndex]="labIndex"
+                sectionControlName="lab"
+                sectionDetailName="Lab"
+                [showDetails]="false"
+              ></medicationsection>
+            </ng-container>
+          </ng-container>
+          <button mat-mini-fab (click)="addRequiredLab()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+          <div>
+            <button type="button" mat-button matStepperPrevious>
+              Previous
+            </button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Treatment Information</ng-template>
+          <ng-container formArrayName="treatmentinformation">
+            <ng-container
+              *ngFor="
+                let treatmentinformationGroup of treatmentinformation()
+                  .controls;
+                let informationIndex = index
+              "
+            >
+              <medicationsection
+                class="dataSection"
+                [formGroupName]="informationIndex"
+                [sections]="treatmentinformation()"
+                [section]="sectionGroupElement(treatmentinformationGroup)"
+                [sectionIndex]="informationIndex"
+                sectionControlName="treatment"
+                sectionDetailName="Treatment"
+                [showComment]="false"
+                [showDetails]="false"
+              ></medicationsection>
+            </ng-container>
+          </ng-container>
+          <button mat-mini-fab (click)="addTreatmentInformation()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+          <div>
+            <button type="button" mat-button matStepperPrevious>
+              Previous
+            </button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Treatment Parameters</ng-template>
+          <ng-container formArrayName="treatmentparameters">
+            <ng-container
+              *ngFor="
+                let treatmentparametersGroup of treatmentparameters().controls;
+                let parameterIndex = index
+              "
+            >
+              <medicationsection
+                class="dataSection"
+                [formGroupName]="parameterIndex"
+                [sections]="treatmentparameters()"
+                [section]="sectionGroupElement(treatmentparametersGroup)"
+                [sectionIndex]="parameterIndex"
+                sectionControlName="parameter"
+                sectionDetailName="Parameter"
+                [showComment]="false"
+                [showDetails]="false"
+              ></medicationsection>
+            </ng-container>
+          </ng-container>
+          <button mat-mini-fab (click)="addTreatmentParameters()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+          <div>
+            <button type="button" mat-button matStepperPrevious>
+              Previous
+            </button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Vitals</ng-template>
+          <ng-container formArrayName="vitals">
+            <ng-container
+              *ngFor="
+                let vitalsGroup of vitals().controls;
+                let vitalIndex = index
+              "
+            >
+              <medicationsection
+                class="dataSection"
+                [formGroupName]="vitalIndex"
+                [sections]="vitals()"
+                [section]="sectionGroupElement(vitalsGroup)"
+                [sectionIndex]="vitalIndex"
+                sectionControlName="vitals"
+                sectionDetailName="Vitals"
+                [showDetails]="false"
+              ></medicationsection>
+            </ng-container>
+          </ng-container>
+          <hr />
+          <button mat-mini-fab (click)="addVitals()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+          <div>
+            <button type="button" mat-button matStepperPrevious>
+              Previous
+            </button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Premedication</ng-template>
+          <ng-container formArrayName="premedications">
+            <ng-container
+              *ngFor="
+                let premedicationGroup of premedications().controls;
+                let medicationIndex = index
+              "
+            >
+              <medicationsection
+                class="dataSection"
+                [formGroupName]="medicationIndex"
+                [sections]="premedications()"
+                [section]="sectionGroupElement(premedicationGroup)"
+                [sectionIndex]="medicationIndex"
+                sectionControlName="premedication"
+                sectionDetailName="Premedication"
+              ></medicationsection>
+            </ng-container>
+          </ng-container>
+          <button mat-mini-fab (click)="addPremedication()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+          <div>
+            <button type="button" mat-button matStepperPrevious>
+              Previous
+            </button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Hydration</ng-template>
+          <ng-container formArrayName="hydration">
+            <ng-container
+              *ngFor="
+                let hydrationGroup of hydration().controls;
+                let hydrationIndex = index
+              "
+            >
+              <medicationsection
+                class="dataSection"
+                [formGroupName]="hydrationIndex"
+                [sections]="hydration()"
+                [section]="sectionGroupElement(hydrationGroup)"
+                [sectionIndex]="hydrationIndex"
+                sectionControlName="hydration"
+                sectionDetailName="Hydration"
+              ></medicationsection>
+            </ng-container>
+          </ng-container>
+          <button mat-mini-fab (click)="addHydration()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+          <div>
+            <button type="button" mat-button matStepperPrevious>
+              Previous
+            </button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Non-Chemo Medication Orders</ng-template>
+          <ng-container formArrayName="nonchemomedicationorders">
+            <ng-container
+              *ngFor="
+                let nonchemomedicationordersGroup of nonchemomedicationorders()
+                  .controls;
+                let nonchemomedicationorderIndex = index
+              "
+            >
+              <medicationsection
+                class="dataSection"
+                [formGroupName]="nonchemomedicationorderIndex"
+                [sections]="nonchemomedicationorders()"
+                [section]="sectionGroupElement(nonchemomedicationordersGroup)"
+                [sectionIndex]="nonchemomedicationorderIndex"
+                sectionControlName="nonchemomedicationorder"
+                sectionDetailName="Non-Chemo Medication Order"
+              ></medicationsection>
+            </ng-container>
+          </ng-container>
+          <hr />
+          <button mat-mini-fab (click)="addNonChemoMedicationOrder()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+          <div>
+            <button type="button" mat-button matStepperPrevious>
+              Previous
+            </button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Post Medications</ng-template>
+          <ng-container formArrayName="postmedications">
+            <ng-container
+              *ngFor="
+                let postmedicationsGroup of postmedications().controls;
+                let postmedicationIndex = index
+              "
+            >
+              <medicationsection
+                class="dataSection"
+                [formGroupName]="postmedicationIndex"
+                [sections]="postmedications()"
+                [section]="sectionGroupElement(postmedicationsGroup)"
+                [sectionIndex]="postmedicationIndex"
+                sectionControlName="postmedication"
+                sectionDetailName="Post Medication"
+              ></medicationsection>
+            </ng-container>
+          </ng-container>
+          <hr />
+          <button mat-mini-fab (click)="addPostMedications()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+          <div>
+            <button type="button" mat-button matStepperPrevious>
+              Previous
+            </button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Emergency Medications</ng-template>
+          <ng-container formArrayName="emergencymedications">
+            <ng-container
+              *ngFor="
+                let emergencymedicationGroup of emergencymedications().controls;
+                let emergencymedicationIndex = index
+              "
+            >
+              <medicationsection
+                [formGroupName]="emergencymedicationIndex"
+                [sections]="emergencymedications()"
+                [section]="sectionGroupElement(emergencymedicationGroup)"
+                [sectionIndex]="emergencymedicationIndex"
+                sectionControlName="emergencymedication"
+                sectionDetailName="Emergency Medication"
+              ></medicationsection>
+            </ng-container>
+          </ng-container>
+          <button mat-mini-fab (click)="addEmergencyMedication()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+          <div>
+            <button type="button" mat-button matStepperPrevious>
+              Previous
+            </button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Take Home Medications</ng-template>
+          <ng-container formArrayName="takehomemedications">
+            <ng-container
+              *ngFor="
+                let takehomemedicationGroup of takehomemedications().controls;
+                let takehomemedicationIndex = index
+              "
+            >
+              <medicationsection
+                class="dataSection"
+                [formGroupName]="takehomemedicationIndex"
+                [sections]="emergencymedications()"
+                [section]="sectionGroupElement(takehomemedicationGroup)"
+                [sectionIndex]="takehomemedicationIndex"
+                sectionControlName="takehomemedication"
+                sectionDetailName="Take Home Medication"
+              ></medicationsection>
+            </ng-container>
+          </ng-container>
+          <hr />
+          <button mat-mini-fab (click)="addTakeHomeMedication()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+        </mat-step>
+      </mat-vertical-stepper>
+      <div>
+        <button type="button" mat-button matStepperPrevious>Previous</button>
+        <button type="button" mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Summary</ng-template>
+      <displaysummary [planForm]="planForm.value"></displaysummary>
+      <div>
+        <button type="button" mat-button matStepperPrevious>Back</button>
+        <div class="actionButtons">
+          <div *ngIf="id; else createButtons">
+            <button
+              type="button"
+              mat-raised-button
+              class="saveButton"
+              (click)="savePlan()"
+            >
+              Save Plan Edits
+            </button>
+          </div>
+          <ng-template #createButtons>
+            <button
+              type="button"
+              mat-raised-button
+              class="createButton"
+              (click)="createPlan()"
+            >
+              Create Plan
+            </button>
+          </ng-template>
+          <button
+            type="button"
+            mat-raised-button
+            class="discardChangesButton"
+            (click)="discardChangesToPlan()"
+          >
+            {{ cancelButtonText }}
+          </button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</form>

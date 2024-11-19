@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonRow {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.pagetitle {
+  font-weight: bold;
+  color: black;
+  font-size: 2em;
+  font-family: "Times New Roman", Times, serif;
+  padding: 5px;
+}
+
+.deleteButton {
+  color: white;
+  background-color: gray;
+}
+
+.deleteButton:hover {
+  background-color: black;
+}

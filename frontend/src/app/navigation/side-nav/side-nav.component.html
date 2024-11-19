@@ -1,0 +1,14 @@
+<mat-sidenav-container class="sidenav-container" autosize>
+  <mat-sidenav #appDrawer mode="push" opened="false" class="sidenav">
+    <div *ngFor="let item of navItems">
+      <mat-nav-list *ngIf="allowedMenuItem(item.permissions)">
+        <nav-menu-list [item]="item"></nav-menu-list>
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

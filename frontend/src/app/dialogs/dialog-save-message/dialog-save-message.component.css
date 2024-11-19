@@ -1,0 +1,9 @@
+.messageText {
+  font-weight: bold;
+  color: green;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.icon {
+  font-size: 42px;
+}

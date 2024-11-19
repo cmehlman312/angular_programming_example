@@ -1,0 +1,97 @@
+<h2>Edit User</h2>
+<div [formGroup]="userForm" class="userFormDIV">
+  <div class="formcontainer">
+    <h3>General Information</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstname" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastname" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Access Requested</mat-label>
+      <select matNativeControl formControlName="access_requested">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Access Reason</mat-label>
+      <input matInput formControlName="accessreason" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Active</mat-label>
+      <select matNativeControl formControlName="active">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Userid</mat-label>
+      <input matInput formControlName="userid" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" />
+    </mat-form-field>
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Affiliation</mat-label>
+      <input matInput formControlName="affiliation" />
+    </mat-form-field> -->
+    <h3>Security</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Administrator</mat-label>
+      <select matNativeControl formControlName="admin">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <select matNativeControl formControlName="role">
+        <option value=""></option>
+        <option value="Willow">Willow Analyst</option>
+        <option value="Pharmacist">Pharmacist</option>
+        <option value="Ambulatory">Ambulatory</option>
+        <option value="View Only">View Only</option>
+      </select>
+    </mat-form-field>
+
+    <div>
+      <mat-label class="labelHeader">Last Modified:</mat-label>
+      {{ userData?.modified_date | date : "medium" }}
+    </div>
+    <div>
+      <mat-label class="labelHeader">Created:</mat-label>
+      {{ userData?.create_date | date : "medium" }}
+    </div>
+    <div class="buttonContainer">
+      <div>
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          (click)="cancelUserEdit()"
+        >
+          Cancel
+        </button>
+      </div>
+      <div>
+        <button
+          type="button"
+          mat-raised-button
+          color="warn"
+          (click)="updateUser()"
+        >
+          Update User
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

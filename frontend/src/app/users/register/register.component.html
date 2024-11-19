@@ -1,0 +1,71 @@
+<div *ngIf="callbackTest; else productionsection">
+  <h3>
+    You have reached the callback test section from Okta
+  </h3>
+</div>
+<ng-template #productionsection>
+  <div *ngIf="userExists === false; else requestwaiting">
+    <h2>Hi {{ userForm.value.firstname }},</h2>
+    <h3>
+      Thanks for verifying your credentials but unfortunately you are not authorized.<br /><br />
+      Please fill out the Access Request form below to request access.<br />
+    </h3>
+
+    <form [formGroup]="userForm">
+      <div fxLayout="column" class="userrequestForm">
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            placeholder="First Name"
+            formControlName="firstname"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Last Name" formControlName="lastname" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            required="true"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Access Reason</mat-label>
+          <textarea
+            matInput
+            appearance="fill"
+            cdkTextareaAutosize
+            type="text"
+            formControlName="accessreason"
+            required="true"
+          ></textarea>
+        </mat-form-field>
+        <div>
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="submitAccessRequest()"
+          >
+            Submit Request
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template #requestwaiting>
+  <div *ngIf="userAllowed === false; else allowedrequest">
+    <h2>
+      Your request for access has not been provisioned. Please contact your administrator.
+    </h2>
+  </div>
+  <ng-template #allowedrequest>
+    <h2>Thanks for logging in, you will be redirected to the home page.</h2>
+  </ng-template>
+</ng-template>

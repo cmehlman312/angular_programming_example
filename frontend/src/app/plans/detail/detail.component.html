@@ -1,0 +1,61 @@
+<div id="printplanDetails">
+  <displaysummary [planForm]="plandetail"></displaysummary>
+
+  <footer fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px">
+    <div class="buttoncontainer">
+      <button
+        type="button"
+        mat-raised-button
+        class="backButton"
+        (click)="gotoPlanList()"
+      >
+        Back to {{ previousPageName }} List
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="editButton"
+        (click)="editPlanButton()"
+        *ngIf="showEditButton"
+      >
+        Edit Plan
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="submitforreviewButton"
+        (click)="submitforreviewPlanButton()"
+        *ngIf="showSubmitForReviewButton"
+      >
+        Submit For Review
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="reverttodraftButton"
+        (click)="reverttodraftPlanButton()"
+        *ngIf="showRevertToDraftButton"
+      >
+        Revert to Draft
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="copyButton"
+        (click)="copyPlan()"
+        *ngIf="showCopyButton"
+      >
+        Copy Plan
+      </button>
+
+      <button
+        type="button"
+        mat-raised-button
+        class="printButton"
+        (click)="printPlanDetails()"
+      >
+        Print
+      </button>
+    </div>
+  </footer>
+</div>

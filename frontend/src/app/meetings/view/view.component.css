@@ -1,0 +1,62 @@
+.pagetitle {
+  color: maroon;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}
+
+.selectedRow {
+  background-color: orange;
+}
+
+.attendeesContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.attendeeContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  background-color: lightblue;
+}
+
+.approvalNeeded {
+  color: orange;
+}
+
+.approvalYes {
+  color: green;
+}
+
+.approvalNo {
+  color: red;
+}
+
+.mat-column-select {
+  width: 1px;
+  max-width: 1px;
+  min-width: 1px;
+}
+
+.meetingInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.labelTitle {
+  font-weight: bold;
+  gap: 10px;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+}

@@ -1,0 +1,37 @@
+<div mat-dialog-content class="dialogContainer">
+  <p>Rejected reason</p>
+  <mat-form-field appearance="fill">
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      [formControl]="fromDialog"
+      placeholder="reason for rejecting *"
+      isRequired="true"
+    ></textarea>
+    <mat-error *ngIf="!fromDialog.hasError('required')">
+      Please enter a reason
+    </mat-error>
+    <mat-error *ngIf="fromDialog.hasError('required')">
+      Rejected reason is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button
+    type="button"
+    mat-raised-button
+    (click)="cancelDialog()"
+    cdkFocusInitial
+  >
+    Cancel
+  </button>
+  <button
+    type="button"
+    mat-raised-button
+    (click)="closeDialog()"
+    [disabled]="fromDialog.hasError('required')"
+  >
+    Ok
+  </button>
+</div>

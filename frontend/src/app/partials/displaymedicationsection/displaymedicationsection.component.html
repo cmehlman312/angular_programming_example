@@ -1,0 +1,53 @@
+<div>
+  <div *ngIf="sectionIndex > 0">
+    <hr />
+  </div>
+
+  <mat-label class="detailLabel">{{ detailName }}:</mat-label>
+  <span
+    class="displayRichText"
+    [innerHTML]="detailInformation | safeHTML"
+  ></span>
+</div>
+<div *ngIf="showDetails">
+  <div>
+    <mat-label class="detailLabel">Dose:</mat-label>
+    <span class="detailData">{{ data?.dose }}</span>
+  </div>
+  <div>
+    <mat-label class="detailLabel">Admin Duration:</mat-label>
+    <span class="detailData">{{ data?.adminduration }}</span>
+  </div>
+  <div>
+    <mat-label class="detailLabel">Route:</mat-label>
+    <span class="detailData">{{ data?.route }}</span>
+  </div>
+  <div>
+    <mat-label class="detailLabel">Frequency:</mat-label>
+    <span class="detailData">{{ data?.frequency }}</span>
+  </div>
+  <div>
+    <mat-label class="detailLabel">Rate:</mat-label>
+    <span class="detailData">{{ data?.rate }}</span>
+  </div>
+  <div>
+    <mat-label class="detailLabel">Admin Instructions:</mat-label>
+    <span class="detailData">{{ data?.admininstructions }}</span>
+  </div>
+</div>
+<div>
+  <mat-label class="detailLabel">Interval:</mat-label>
+  <span class="detailData">{{ data?.interval }}</span>
+</div>
+<div *ngIf="data?.interval.toLowerCase() === 'custom'">
+  <div>
+    <mat-label class="detailLabel">Custom Interval:</mat-label>
+    <span class="detailData">{{ data?.custominterval }}</span>
+  </div>
+</div>
+<div *ngIf="showComment">
+  <div>
+    <mat-label class="detailLabel">Comments:</mat-label>
+    <span class="detailData">{{ data?.comments }}</span>
+  </div>
+</div>

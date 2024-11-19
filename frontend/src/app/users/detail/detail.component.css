@@ -1,0 +1,22 @@
+mat-label {
+  font-weight: bold;
+}
+
+.editButton {
+  background-color: darkorange;
+  color: white;
+}
+.grantButton {
+  background-color: green;
+  color: white;
+}
+.revokeButton {
+  background-color: red;
+  color: white;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

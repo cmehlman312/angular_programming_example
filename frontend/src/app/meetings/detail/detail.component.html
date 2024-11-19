@@ -1,0 +1,186 @@
+<h1 class="pagetitle">
+  Meeting agenda for {{ meetingdate | date : "longDate" }}
+</h1>
+<div class="saveMeetingButton">
+  <button
+    type="button"
+    mat-raised-button
+    color="primary"
+    (click)="saveMeeting()"
+  >
+    Save meeting
+  </button>
+</div>
+<div [formGroup]="meetingForm">
+  <h2>Details</h2>
+  <div class="meetingInfo">
+    <mat-form-field appearance="fill" class="meetingInfoInputs">
+      <mat-label>Meeting Link</mat-label>
+      <input matInput formControlName="meeting_link" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="meetingInfoInputs">
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="meeting_date" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Time</mat-label>
+      <input matInput type="time" formControlName="meeting_time" />
+    </mat-form-field>
+  </div>
+  <h2>Attendees</h2>
+
+  <div class="example-form">
+    <table>
+      <tr>
+        <th>Attendees</th>
+        <th></th>
+      </tr>
+      <tr
+        formArrayName="attendees"
+        *ngFor="let attendee of attendeesArray().controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <td>
+            <mat-form-field class="example-full-width">
+              <input
+                type="text"
+                placeholder="Attendee Name"
+                aria-label="Attendee Name"
+                matInput
+                formControlName="name"
+                [matAutocomplete]="auto"
+                #trigger="matAutocompleteTrigger"
+                (keydown.enter)="trigger.closePanel()"
+                #attendeeInput
+              />
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option
+                  *ngFor="let option of filteredOptions[i] | async"
+                  [value]="option"
+                  (onSelectionChange)="
+                    attendeeInput.value != undefined &&
+                      onAttendeeEnter($event, i)
+                  "
+                >
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </td>
+          <td>
+            <button
+              mat-icon-button
+              color="primary"
+              type="button"
+              title="delete item"
+              (click)="removeAttendee(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+      </tr>
+    </table>
+  </div>
+  <button mat-mini-fab (click)="addNewAttendee()" class="addAttendeeButton">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <mat-divider></mat-divider>
+  <h2>Meeting Notes</h2>
+
+  <ckeditor [editor]="Editor" formControlName="notes"></ckeditor>
+</div>
+<br />
+<br />
+
+<mat-divider></mat-divider>
+<h2>Plans</h2>
+<table mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-checkbox
+        (click)="$event.stopPropagation()"
+        (change)="selectHandler(row)"
+        [checked]="selection.isSelected(row)"
+      >
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="number">
+    <th mat-header-cell *matHeaderCellDef>Number</th>
+    <td mat-cell *matCellDef="let element">{{ element.number }}</td>
+  </ng-container>
+  <ng-container matColumnDef="medicationname">
+    <th mat-header-cell *matHeaderCellDef>Medicatio Nname</th>
+    <td mat-cell *matCellDef="let element">{{ element.medicationname }}</td>
+  </ng-container>
+  <ng-container matColumnDef="specialty">
+    <th mat-header-cell *matHeaderCellDef>Specialty</th>
+    <td mat-cell *matCellDef="let element">{{ element.specialty }}</td>
+  </ng-container>
+  <ng-container matColumnDef="requestor">
+    <th mat-header-cell *matHeaderCellDef>Requestor</th>
+    <td mat-cell *matCellDef="let element">{{ element.requestor }}</td>
+  </ng-container>
+  <ng-container matColumnDef="vote">
+    <th mat-header-cell *matHeaderCellDef>Approval</th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="loadPlanApproval(element) === ''; else checkApproval">
+        <button type="button" mat-icon-button color="primary">
+          <mat-icon
+            class="approvalNeeded"
+            (click)="changePlanApproval(element, true)"
+          >
+            ballot
+          </mat-icon>
+        </button>
+      </div>
+      <ng-template #checkApproval>
+        <div *ngIf="loadPlanApproval(element); else notApproved">
+          <button type="button" mat-icon-button color="primary">
+            <mat-icon
+              class="approvalYes"
+              (click)="changePlanApproval(element, false)"
+            >
+              thumb_up
+            </mat-icon>
+          </button>
+        </div>
+      </ng-template>
+      <ng-template #notApproved>
+        <button type="button" mat-icon-button color="primary">
+          <mat-icon
+            class="approvalNo"
+            (click)="changePlanApproval(element, '')"
+          >
+            thumb_down
+          </mat-icon>
+        </button>
+      </ng-template>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<div *ngIf="this.selection.hasValue()">
+  <h2>Plan Notes</h2>
+  <ckeditor [editor]="Editor" [formControl]="plannotes"></ckeditor>
+  <!-- <ckeditor [editor]="Editor" (change)="onChangePlanNote($event)"></ckeditor> -->
+
+  <h2>Plan Details</h2>
+  <displaysummary [planForm]="selection.selected[0]"></displaysummary>
+</div>
+
+<mat-divider></mat-divider>

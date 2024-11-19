@@ -1,0 +1,34 @@
+<displaysummary [planForm]="plandetail"></displaysummary>
+<footer fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px">
+  <div class="buttoncontainer">
+    <div class="leftbuttoncontainer">
+      <button
+        type="button"
+        mat-raised-button
+        class="backButton"
+        (click)="gotoVerificationList()"
+      >
+        Back to Verification List
+      </button>
+    </div>
+
+    <div class="centerbuttoncontainer">
+      <button
+        type="button"
+        mat-raised-button
+        class="approveButton"
+        (click)="approveVerificationButton()"
+      >
+        Approve
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="reviseButton"
+        (click)="reviseVerificationButton()"
+      >
+        Revise
+      </button>
+    </div>
+  </div>
+</footer>

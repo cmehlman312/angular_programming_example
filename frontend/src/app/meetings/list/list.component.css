@@ -1,0 +1,17 @@
+.meetingplandetails {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.planNumber {
+  color: blue;
+}
+
+.planName {
+  color: red;
+}
+
+.planRequestor {
+  color: green;
+}

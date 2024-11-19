@@ -1,0 +1,85 @@
+.mainContainer {
+  display: flex;
+  width: 100%;
+}
+.mainData {
+  width: 100%;
+}
+
+.labelTag,
+.labelSidebar,
+.labelSidebarHeader,
+.labelDataTitle {
+  font-weight: bold;
+}
+
+.labelTag {
+  color: blue;
+}
+
+.labelSidebar {
+  color: firebrick;
+}
+.labelSidebarHeader {
+  color: black;
+}
+
+.displayRichText,
+.labelTag,
+.labelSidebar,
+.labelSidebarHeader,
+.labelDataTitle,
+.labelData {
+  font-size: 18px;
+}
+
+.displayHeader {
+  font-size: 20px;
+  font-weight: bolder;
+  color: maroon;
+}
+
+.labelSidebar::after {
+  content: "\a";
+  white-space: pre;
+}
+
+.questionHeader {
+  color: navy;
+  font-weight: bolder;
+  font-size: 18px;
+}
+.questionHeader::after {
+  content: "\a";
+  white-space: pre;
+}
+
+.sectionDIV::before {
+  content: "\a";
+  white-space: pre;
+}
+
+.detailLabel {
+  font-size: 18px;
+}
+
+.mat-card-header {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+.generalInfoRows {
+  display: flex;
+  justify-content: space-between;
+}
+
+.generalInfoRow {
+  width: 250px;
+}
+
+.title_center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

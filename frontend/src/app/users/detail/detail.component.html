@@ -1,0 +1,83 @@
+<h2>User Detail</h2>
+<mat-card>
+  <mat-card-title>{{ userDetail?.fullname }}</mat-card-title>
+  <mat-card-content>
+    <div fxLayout="column">
+      <div>
+        <mat-label>First Name: </mat-label>
+        {{ userDetail?.firstname }}
+      </div>
+      <div>
+        <mat-label>Last Name: </mat-label>
+        {{ userDetail?.lastname }}
+      </div>
+      <div>
+        <mat-label>E-mail: </mat-label>
+        {{ userDetail?.email }}
+      </div>
+      <div>
+        <mat-label>Active: </mat-label>
+        {{ userDetail?.active ? "Yes" : "No" }}
+      </div>
+      <div>
+        <mat-label>Access Requested: </mat-label>
+        {{ userDetail?.access_requested ? "Yes" : "" }}
+      </div>
+      <div>
+        <mat-label>Access Reason: </mat-label>
+        {{ userDetail?.accessreason }}
+      </div>
+      <div>
+        <mat-label>Role: </mat-label>
+        {{ userDetail?.role }}
+      </div>
+      <div>
+        <mat-label>Admin: </mat-label>
+        {{ userDetail?.admin ? "Yes" : "No" }}
+      </div>
+    </div>
+    <br />
+    <mat-label>Last Modified:</mat-label>
+    {{ userDetail?.modified_date | date : "medium" }} <br />
+    <mat-label>Created:</mat-label
+    >{{ userDetail?.create_date | date : "medium" }}
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="buttonContainer">
+      <button
+        type="button"
+        mat-raised-button
+        color="primary"
+        (click)="gotoUserList()"
+      >
+        Back to User List
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="editButton"
+        (click)="editUser(userDetail?._id)"
+      >
+        Edit User
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="grantButton"
+        (click)="grantUserAccess(userDetail?._id)"
+      >
+        Grant Access
+      </button>
+      <div>
+        <button
+          type="button"
+          mat-raised-button
+          class="revokeButton"
+          (click)="revokeUserAccess(userDetail?._id)"
+        >
+          Revoke Access
+        </button>
+      </div>
+    </div>
+  </mat-card-footer>
+</mat-card>

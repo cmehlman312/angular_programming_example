@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+}
+
+.pagetitle {
+  font-weight: bold;
+  color: black;
+  font-size: 2em;
+  font-family: "Times New Roman", Times, serif;
+  padding: 5px;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+}

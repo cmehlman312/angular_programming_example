@@ -1,0 +1,95 @@
+.pagetitle {
+  color: maroon;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.demo-table {
+  width: 100%;
+}
+
+.selectedRow {
+  background-color: orange;
+}
+
+.attendeecontainer {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.removeAttendee {
+  color: red;
+}
+
+.attendeeContainer {
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h2 {
+  background-color: lightblue;
+}
+
+.addnoteButton {
+  color: green;
+}
+
+.approvalNeeded {
+  color: orange;
+}
+
+.approvalYes {
+  color: green;
+}
+
+.approvalNo {
+  color: red;
+}
+
+.mat-column-select {
+  width: 1px;
+  max-width: 1px;
+  min-width: 1px;
+}
+
+.saveMeetingButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+.meetingInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.meetingInfoInputs {
+  width: 450px;
+}
+
+.addAttendeeButton {
+  color: white;
+  background-color: maroon;
+}

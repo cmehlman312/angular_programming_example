@@ -1,0 +1,380 @@
+<div class="mainContainer">
+  <mat-card *ngIf="sidebar">
+    <div>
+      <button
+        type="button"
+        mat-raised-button
+        class="audittrailButton"
+        (click)="displaySectionSelected('audittrail')"
+        *ngIf="cardDisplay !== 'audittrail'"
+      >
+        Audit Trail
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="compareButton"
+        (click)="displaySectionSelected('details')"
+        *ngIf="cardDisplay !== 'details'"
+      >
+        Details
+      </button>
+    </div>
+  </mat-card>
+  <mat-card class="mainData">
+    <mat-card-content *ngIf="cardDisplay === 'details'" id="mainNoteData">
+      <!-- <mat-card-header class="title_center"> -->
+      <div class="title_center">
+        <div>
+          <img
+            id="brandingLogo"
+            height="75px"
+            src="/assets/logos/site_logo.png"
+          />
+        </div>
+        <mat-label class="displayHeader">Therapy Plan</mat-label>
+      </div>
+      <!-- </mat-card-header> -->
+      <br /><br /><br />
+      <!-- <mat-card-content> -->
+      <section class="generalInfo">
+        <div class="generalInfoRows">
+          <section class="generalInfoRow">
+            <mat-label class="labelSidebar">Request Number</mat-label>
+            <mat-label class="labelData">{{ planForm?.number }}</mat-label>
+          </section>
+          <section class="generalInfoRow">
+            <mat-label class="labelSidebar">Medication Name</mat-label>
+            <mat-label class="labelData">{{
+              planForm?.medicationname
+            }}</mat-label>
+          </section>
+          <section class="generalInfoRow">
+            <mat-label class="labelSidebar">Requestor</mat-label>
+            <mat-label class="labelData">{{ planForm?.requestor }}</mat-label>
+          </section>
+        </div>
+        <br />
+        <div class="generalInfoRows">
+          <section class="generalInfoRow">
+            <mat-label class="labelSidebar">Status</mat-label>
+            <mat-label class="labelData">{{ planForm?.status }}</mat-label>
+          </section>
+          <section class="generalInfoRow">
+            <mat-label class="labelSidebar">Specialty</mat-label>
+            <div *ngFor="let item of planForm?.specialty | keyvalue">
+              <mat-label *ngIf="item.value" class="labelData">
+                {{ titleCase($any(item.key)) }}
+              </mat-label>
+            </div>
+          </section>
+          <section class="generalInfoRow">
+            <mat-label class="labelSidebar">Created</mat-label>
+            <mat-label class="labelData">
+              {{ planForm.created?.created_date | date : "short" }}
+            </mat-label>
+          </section>
+        </div>
+      </section>
+      <br />
+      <hr
+        style="height: 2px; border: none; color: #333; background-color: #333"
+      />
+      <br />
+      <div>
+        <mat-label class="questionHeader">Required Labs</mat-label>
+        <div
+          *ngIf="
+            checkFormArraySize('array', planForm?.requiredlabs);
+            else norequiredlabs
+          "
+        >
+          <div
+            *ngFor="
+              let labs of planForm?.requiredlabs | keyvalue;
+              let idx = index
+            "
+          >
+            <div *ngIf="checkFormArraySize('object', labs.value)">
+              <displaymedicationsection
+                [showDetails]="false"
+                [data]="labs.value"
+                detailfield="lab"
+                detailName="Lab"
+                [sectionIndex]="idx"
+              ></displaymedicationsection>
+            </div>
+          </div>
+        </div>
+        <ng-template #norequiredlabs>
+          <h3>N/A</h3>
+        </ng-template>
+      </div>
+      <div class="sectionDIV">
+        <mat-label class="questionHeader">Treatment Information</mat-label>
+        <div
+          *ngIf="
+            checkFormArraySize('array', planForm?.treatmentinformation);
+            else notreatmentinformation
+          "
+        >
+          <div
+            *ngFor="
+              let treatment of planForm?.treatmentinformation | keyvalue;
+              let idx = index
+            "
+          >
+            <div *ngIf="checkFormArraySize('object', treatment.value)">
+              <displaymedicationsection
+                [showDetails]="false"
+                [data]="treatment.value"
+                [sectionIndex]="idx"
+                detailfield="treatment"
+                detailName="Treatment"
+                [showComment]="false"
+              ></displaymedicationsection>
+            </div>
+          </div>
+        </div>
+        <ng-template #notreatmentinformation>
+          <h3>N/A</h3>
+        </ng-template>
+      </div>
+      <div class="sectionDIV">
+        <mat-label class="questionHeader">Treatment Parameters</mat-label>
+        <div
+          *ngIf="
+            checkFormArraySize('array', planForm?.treatmentparameters);
+            else notreatmentparameters
+          "
+        >
+          <div
+            *ngFor="
+              let parameter of planForm?.treatmentparameters | keyvalue;
+              let idx = index
+            "
+          >
+            <div *ngIf="checkFormArraySize('object', parameter.value)">
+              <displaymedicationsection
+                [showDetails]="false"
+                [data]="parameter.value"
+                [sectionIndex]="idx"
+                detailfield="parameter"
+                detailName="Parameter"
+                [showComment]="false"
+              ></displaymedicationsection>
+            </div>
+          </div>
+        </div>
+        <ng-template #notreatmentparameters>
+          <h3>N/A</h3>
+        </ng-template>
+      </div>
+      <div class="sectionDIV">
+        <mat-label class="questionHeader">Vitals</mat-label>
+        <div
+          *ngIf="checkFormArraySize('array', planForm?.vitals); else novitals"
+        >
+          <div
+            *ngFor="let vital of planForm?.vitals | keyvalue; let idx = index"
+          >
+            <div *ngIf="checkFormArraySize('object', vital.value)">
+              <displaymedicationsection
+                [showDetails]="false"
+                [data]="vital.value"
+                [sectionIndex]="idx"
+                detailfield="vitals"
+                detailName="Vitals"
+              ></displaymedicationsection>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #novitals>
+        <h3>N/A</h3>
+      </ng-template>
+      <div class="sectionDIV">
+        <mat-label class="questionHeader">Premedication</mat-label>
+        <div
+          *ngIf="
+            checkFormArraySize('array', planForm?.premedications);
+            else nopremedication
+          "
+        >
+          <div
+            *ngFor="
+              let premedication of planForm?.premedications | keyvalue;
+              let idx = index
+            "
+          >
+            <div *ngIf="checkFormArraySize('object', premedication.value)">
+              <displaymedicationsection
+                [data]="premedication.value"
+                [sectionIndex]="idx"
+                detailfield="premedication"
+                detailName="Premedication"
+              ></displaymedicationsection>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #nopremedication>
+        <h3>N/A</h3>
+      </ng-template>
+      <div class="sectionDIV">
+        <mat-label class="questionHeader">Hydration</mat-label>
+        <div
+          *ngIf="
+            checkFormArraySize('array', planForm?.hydration);
+            else nohydration
+          "
+        >
+          <div
+            *ngFor="
+              let hydration of planForm?.hydration | keyvalue;
+              let idx = index
+            "
+          >
+            <div *ngIf="checkFormArraySize('object', hydration.value)">
+              <displaymedicationsection
+                [data]="hydration.value"
+                [sectionIndex]="idx"
+                detailfield="hydration"
+                detailName="Hydration"
+              ></displaymedicationsection>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #nohydration>
+        <h3>N/A</h3>
+      </ng-template>
+      <div class="sectionDIV">
+        <mat-label class="questionHeader">
+          Non-Chemo Medication Order
+        </mat-label>
+        <div
+          *ngIf="
+            checkFormArraySize('array', planForm?.nonchemomedicationorders);
+            else nononchemomedicationorders
+          "
+        >
+          <div
+            *ngFor="
+              let nonchemomedicationorder of planForm?.nonchemomedicationorders
+                | keyvalue;
+              let idx = index
+            "
+          >
+            <div
+              *ngIf="
+                checkFormArraySize('object', nonchemomedicationorder.value)
+              "
+            >
+              <displaymedicationsection
+                [data]="nonchemomedicationorder.value"
+                [sectionIndex]="idx"
+                detailfield="nonchemomedicationorder"
+                detailName="Non-Chemo Medication Order"
+              ></displaymedicationsection>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #nononchemomedicationorders>
+        <h3>N/A</h3>
+      </ng-template>
+      <div class="sectionDIV">
+        <mat-label class="questionHeader">Post Medications</mat-label>
+        <div
+          *ngIf="
+            checkFormArraySize('array', planForm?.nonchemomedicationorders);
+            else nononchemomedicationorders
+          "
+        >
+          <div
+            *ngFor="
+              let postmedication of planForm?.postmedications | keyvalue;
+              let idx = index
+            "
+          >
+            <div *ngIf="checkFormArraySize('object', postmedication.value)">
+              <displaymedicationsection
+                [data]="postmedication.value"
+                [sectionIndex]="idx"
+                detailfield="postmedication"
+                detailName="Post Medication"
+              ></displaymedicationsection>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #nopostmedications>
+        <h3>N/A</h3>
+      </ng-template>
+      <div class="sectionDIV">
+        <mat-label class="questionHeader">Emergency Medications</mat-label>
+        <div
+          *ngIf="
+            checkFormArraySize('array', planForm?.emergencymedications);
+            else noemergencymedications
+          "
+        >
+          <div
+            *ngFor="
+              let emergencymedication of planForm?.emergencymedications
+                | keyvalue;
+              let idx = index
+            "
+          >
+            <div
+              *ngIf="checkFormArraySize('object', emergencymedication.value)"
+            >
+              <displaymedicationsection
+                [data]="emergencymedication.value"
+                [sectionIndex]="idx"
+                detailfield="emergencymedication"
+                detailName="Emergency Medication"
+              ></displaymedicationsection>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noemergencymedications>
+        <h3>N/A</h3>
+      </ng-template>
+      <div class="sectionDIV">
+        <mat-label class="questionHeader">Take Home Medications</mat-label>
+        <div
+          *ngIf="
+            checkFormArraySize('array', planForm?.takehomemedications);
+            else notakehomemedications
+          "
+        >
+          <div
+            *ngFor="
+              let takehomemedication of planForm?.takehomemedications
+                | keyvalue;
+              let idx = index
+            "
+          >
+            <div *ngIf="checkFormArraySize('object', takehomemedication.value)">
+              <displaymedicationsection
+                [data]="takehomemedication.value"
+                [sectionIndex]="idx"
+                detailfield="takehomemedication"
+                detailName="Take Home Medication"
+              ></displaymedicationsection>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #notakehomemedications>
+        <h3>N/A</h3>
+      </ng-template>
+    </mat-card-content>
+    <mat-card-content *ngIf="cardDisplay === 'audittrail'">
+      <plan-audit-trail></plan-audit-trail>
+    </mat-card-content>
+  </mat-card>
+</div>

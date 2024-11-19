@@ -1,0 +1,48 @@
+.okButton:hover {
+  background-color: blue;
+  color: white;
+}
+
+.okButton {
+  background-color: darkblue;
+  color: white;
+}
+
+.cancelButton:hover {
+  background-color: red;
+  color: white;
+}
+
+.cancelButton {
+  background-color: darkred;
+  color: white;
+}
+
+.mat-calendar-body-cell.future-meeting-dates {
+  background: orange;
+  border-radius: 100%;
+}
+
+#circleOrange,
+#circleBlue {
+  width: 25px;
+  height: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+}
+
+#circleOrange {
+  background: orange;
+}
+
+#circleBlue {
+  background: blue;
+}
+
+.legend {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+}

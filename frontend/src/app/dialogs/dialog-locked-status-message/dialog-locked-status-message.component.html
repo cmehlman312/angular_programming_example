@@ -1,0 +1,19 @@
+<h1 class="title">Therapy Plan is locked!</h1>
+<br />
+<label class="labelTitle">Locked By:</label>
+<label class="labelData">{{ lockInformation.lockedby }}</label>
+<br />
+<label class="labelTitle"> Locked Time:</label>
+<label class="labelData">{{ lockInformation.lockdate | date : "short" }}</label>
+<br />
+<br />
+<div>
+  <button
+    type="button"
+    mat-raised-button
+    (click)="closeDialog()"
+    cdkFocusInitial
+  >
+    OK
+  </button>
+</div>

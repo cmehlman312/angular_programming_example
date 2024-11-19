@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  width: 100%;
+}
+:host .mat-list-item.active {
+  background-color: royalblue;
+  color: white;
+}
+:host:hover > .mat-list-item:not(.expanded),
+:host:focus > .mat-list-item:not(.expanded) {
+  background-color: lightblue !important;
+  color: white;
+}
+.mat-list-item {
+  display: flex;
+  width: auto;
+}

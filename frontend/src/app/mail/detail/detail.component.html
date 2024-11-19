@@ -1,0 +1,58 @@
+<div class="pagetitle">{{ pagetitle }}</div>
+<mat-card class="detailCard">
+  <mat-card-title>
+    Workflow Step: {{ mailDetail?.workflowstep }}
+  </mat-card-title>
+  <mat-card-content>
+    <div class="fieldTitleAndData">
+      <label class="fieldName">Status:</label>
+      {{ mailDetail?.status ? "Active" : "Inactive" }}
+    </div>
+    <div class="fieldTitleAndData">
+      <label class="fieldName">Subject:</label>
+      {{ mailDetail?.subject }}
+    </div>
+    <div class="fieldTitleAndData">
+      <label class="fieldName">Message Body:</label>
+      <span class="displayRichText" [innerHTML]="mailDetail?.message"></span>
+    </div>
+
+    <div class="fieldTitleAndData">
+      <Label>Last Modified:</Label>
+      {{ mailDetail?.modified_date | date : "medium" }} <br />
+    </div>
+    <div class="fieldTitleAndData">
+      <Label>Created:</Label>{{ mailDetail?.created_date | date : "medium" }}
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="buttonRow">
+      <button
+        type="button"
+        mat-raised-button
+        color="primary"
+        (click)="gotoMailList()"
+      >
+        Back to Mail List
+      </button>
+
+      <button
+        type="button"
+        mat-raised-button
+        color="warn"
+        (click)="editMail(mailDetail?._id)"
+      >
+        Edit Mail Message
+      </button>
+      <button
+        *ngIf="id"
+        type="button"
+        mat-raised-button
+        class="deleteButton"
+        (click)="deleteMailMessage()"
+      >
+        Delete
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

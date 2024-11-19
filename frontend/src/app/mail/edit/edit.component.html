@@ -1,0 +1,60 @@
+<div class="pagetitle">{{ pagetitle }}</div>
+
+<div class="container custom-container" [formGroup]="mailForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Workflow Step Name</mat-label>
+    <input matInput formControlName="workflowstep" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Subject</mat-label>
+    <input matInput formControlName="subject" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Status</mat-label>
+    <select matNativeControl formControlName="status">
+      <option value="true">Active</option>
+      <option value="false">Inactive</option>
+    </select>
+  </mat-form-field>
+  <mat-label>Message</mat-label>
+  <ckeditor [editor]="Editor" formControlName="message"></ckeditor>
+  <br />
+  <div class="'buttonRow">
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      (click)="cancelMailMessageEdit()"
+    >
+      Cancel
+    </button>
+    <button
+      *ngIf="id; else createButton"
+      type="button"
+      mat-raised-button
+      color="warn"
+      (click)="updateMailMessage()"
+    >
+      Update Mail Message
+    </button>
+    <ng-template #createButton>
+      <button
+        type="button"
+        mat-raised-button
+        color="warn"
+        (click)="createMailMessage()"
+      >
+        Create Mail Message
+      </button>
+    </ng-template>
+    <button
+      *ngIf="id"
+      type="button"
+      mat-raised-button
+      class="deleteButton"
+      (click)="deleteMailMessage()"
+    >
+      Delete
+    </button>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+.data {
+  white-space: pre-wrap;
+}
+
+div {
+  display: flex;
+}
+
+::ng-deep .errorMessage {
+  color: #ffffff !important;
+  background-color: #cc3333 !important;
+}

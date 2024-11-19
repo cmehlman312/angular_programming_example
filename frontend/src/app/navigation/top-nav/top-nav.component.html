@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" class="mat-elevation-z1">
+  <button
+    mat-icon-button
+    id="menu"
+    (click)="navService.clickedNavMenu()"
+    *ngIf="isLoggedIn$ | async"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Therapy Plan Oversight Committee</span>
+  <span class="menu-spacer"></span>
+  <div class="currentUser">
+    <h2>{{ navService.currentuser }}</h2>
+  </div>
+  <div *ngIf="!(isLoggedIn$ | async); else showLogout">
+    <button type="button" mat-button (click)="login()">Login/Register</button>
+  </div>
+  <ng-template #showLogout>
+    <button type="button" mat-button (click)="logout(); navService.closeNav()">
+      Logout
+    </button>
+  </ng-template>
+</mat-toolbar>

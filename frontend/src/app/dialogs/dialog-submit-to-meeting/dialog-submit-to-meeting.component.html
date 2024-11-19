@@ -1,0 +1,32 @@
+<div class="date_container">
+  <mat-label>Choose a meeting date</mat-label>
+  <mat-calendar
+    [(selected)]="meetingDate"
+    (selectedChange)="onSelect($event)"
+    [dateFilter]="weekendFilter"
+    [dateClass]="dateClass"
+    [selected]="currentmeetingdate"
+  ></mat-calendar>
+</div>
+<div class="legend">
+  <div id="circleOrange"></div>
+  Existing Meetings
+</div>
+<div class="legend">
+  <div id="circleBlue"></div>
+  Current Selected Meeting
+</div>
+
+<div mat-dialog-actions>
+  <button
+    mat-button
+    mat-dialog-close
+    class="cancelButton"
+    (click)="closeDialog()"
+  >
+    Cancel
+  </button>
+  <button mat-button mat-dialog-close class="okButton" (click)="okDialog()">
+    Save Meeting Date
+  </button>
+</div>

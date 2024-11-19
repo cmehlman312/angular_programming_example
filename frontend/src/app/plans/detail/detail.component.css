@@ -1,0 +1,43 @@
+.buttoncontainer {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+}
+
+footer {
+  position: fixed;
+  bottom: 1em;
+}
+
+.editButton {
+  background-color: darkorange;
+}
+.copyButton {
+  background-color: darkslateblue;
+}
+.backButton {
+  background-color: blue;
+}
+
+.submitforreviewButton {
+  background-color: darkseagreen;
+}
+.reverttodraftButton {
+  background-color: firebrick;
+}
+.submittomeetingButton {
+  background-color: darkgreen;
+}
+.printButton {
+  background-color: maroon;
+}
+
+.backButton,
+.editButton,
+.copyButton,
+.submitforreviewButton,
+.reverttodraftButton,
+.submittomeetingButton,
+.printButton {
+  color: white;
+}

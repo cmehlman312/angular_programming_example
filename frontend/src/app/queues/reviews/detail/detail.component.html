@@ -1,0 +1,50 @@
+<displaysummary [planForm]="plandetail"></displaysummary>
+<footer fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px">
+  <div class="buttoncontainer">
+    <div class="leftbuttoncontainer">
+      <button
+        type="button"
+        mat-raised-button
+        class="backButton"
+        (click)="gotoReviewList()"
+      >
+        Back to Review List
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="editButton"
+        (click)="editPlanButton()"
+      >
+        Edit Plan
+      </button>
+    </div>
+
+    <div class="centerbuttoncontainer">
+      <button
+        type="button"
+        mat-raised-button
+        class="approveButton"
+        (click)="approveReviewButton()"
+      >
+        Approve
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="rejectButton"
+        (click)="rejectReviewButton()"
+      >
+        Reject
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="reviseButton"
+        (click)="reviseReviewButton()"
+      >
+        Revise
+      </button>
+    </div>
+  </div>
+</footer>

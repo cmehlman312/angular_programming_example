@@ -1,0 +1,29 @@
+.buttoncontainer,
+.centerbuttoncontainer,
+.leftbuttoncontainer {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  width: 100%;
+}
+
+footer {
+  position: fixed;
+  bottom: 1em;
+}
+
+.completeButton {
+  background-color: green;
+}
+.backButton {
+  background-color: blue;
+}
+.editButton {
+  background-color: darkorange;
+}
+
+.backButton,
+.completeButton,
+.editButton {
+  color: white;
+}

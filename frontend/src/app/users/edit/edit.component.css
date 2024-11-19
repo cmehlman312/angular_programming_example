@@ -1,0 +1,18 @@
+.userFormDIV {
+  width: 50%;
+}
+
+.formcontainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.labelHeader {
+  font-weight: bold;
+}
